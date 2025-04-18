@@ -61,10 +61,16 @@ namespace WebsiteMonitor
             
             IConfiguration config = builder.Build();
             
-            string pushoverUserKey = config["Pushover:UserKey"]!;
-            string pushoverAppToken = config["Pushover:AppToken"]!;
-            string websiteUrls = config["Website:Urls"]!;
-            int checkInterval = config.GetValue<int>("Website:CheckInterval", _checkIntervalMs);
+            string pushoverUserKey = Environment.GetEnvironmentVariable("PushoverUserKey") 
+                ?? config["Pushover:UserKey"]!;;
+            string pushoverAppToken = Environment.GetEnvironmentVariable("PushoverAppToken")
+                ?? config["Pushover:AppToken"]!;
+            string websiteUrls = Environment.GetEnvironmentVariable("WebsiteUrls")
+                ?? config["Website:Urls"]!;
+            int checkInterval = int.TryParse(Environment.GetEnvironmentVariable("CheckInterval"), out int parsedValue) 
+                ? parsedValue 
+                : config.GetValue<int>("Website:CheckInterval", _checkIntervalMs);
+
             
             _pushoverUserKey = pushoverUserKey;
             _pushoverAppToken = pushoverAppToken;
