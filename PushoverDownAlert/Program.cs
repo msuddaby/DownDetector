@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace WebsiteMonitor
+namespace PushoverDownAlert
 {
     class Program
     {
@@ -17,8 +17,8 @@ namespace WebsiteMonitor
             // Load configuration
             GetConfig();
             
-            
-            Console.WriteLine($"Starting website monitoring for {_websiteUrls}");
+            string websiteUrls = string.Join(", ", _websiteUrls);
+            Console.WriteLine($"Starting website monitoring for {websiteUrls} websites.");
             Console.WriteLine($"Checking every {_checkIntervalMs / 1000} seconds");
             Console.WriteLine("Press Ctrl+C to exit");
             
