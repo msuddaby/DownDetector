@@ -34,12 +34,12 @@ namespace PushoverDownAlert
                     
                         if (!isWebsiteUp)
                         {
-                            Console.WriteLine($"[{DateTime.Now}] ALERT: Website is DOWN!");
+                            Console.WriteLine($"[{DateTime.Now}] ALERT: Website {url} is DOWN!");
                             await SendPushoverAlert($"Website {url} is DOWN", $"The website check failed at {DateTime.Now}");
                         }
                         else
                         {
-                            Console.WriteLine($"[{DateTime.Now}] Website is UP");
+                            Console.WriteLine($"[{DateTime.Now}] Website {url} is UP");
                         }
                     }
                     catch (Exception ex)
